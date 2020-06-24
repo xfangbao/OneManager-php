@@ -189,9 +189,7 @@
 <!--IsmusicFileStart-->
                         <audio src="<!--FileDownUrl-->" controls="controls" style="width: 100%"></audio>
 <!--IsmusicFileEnd-->
-<!--IspdfFileStart-->
-                        <div id="pdf-d"></div>
-<!--IspdfFileEnd-->
+
 <!--IsofficeFileStart-->
                         <iframe id="office-a" src="https://view.officeapps.live.com/op/view.aspx?src=<!--FileEncodeDownUrl-->" style="width: 100%;height: 800px" frameborder="0"></iframe>
 <!--IsofficeFileEnd-->
@@ -470,7 +468,6 @@
 <!--MdRequireStart--><link rel="stylesheet" href="//unpkg.zhimg.com/github-markdown-css@3.0.1/github-markdown.css">
 <script type="text/javascript" src="//unpkg.zhimg.com/marked@0.6.2/marked.min.js"></script><!--MdRequireEnd-->
 <!--GuestUploadStart--><script type="text/javascript" src="//cdn.bootcss.com/spark-md5/3.0.0/spark-md5.min.js"></script><!--GuestUploadEnd-->
-<!--IsFileStart--><!--IspdfFileStart--><script src="//cdn.bootcss.com/pdf.js/2.3.200/pdf.min.js"></script><!--IspdfFileEnd--><!--IsFileEnd-->
 <!--ListEnd-->
 <script type="text/javascript">
     function changelanguage(str)
@@ -588,36 +585,7 @@
     }
     addVideos(['<!--FileDownUrl-->']);
 <!--IsvideoFileEnd-->
-<!--IspdfFileStart-->
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdn.bootcss.com/pdf.js/2.3.200/pdf.worker.min.js';
-    var loadingTask = pdfjsLib.getDocument({ url: '<!--FileDownUrl-->', });
-    loadingTask.promise.then(function(pdf) {
-        var pagenum =  pdf.numPages;
-        var pdfContainer = document.getElementById('pdf-d');
-        for (var i=1;i<=pagenum;i++) {
-            var canvasNew = document.createElement('canvas');
-            canvasNew.id = 'pdf-c'+i;
-            pdfContainer.appendChild(canvasNew);
-            renderpage(pdf,i);
-        }
-    });
-    function renderpage(pdf,i)
-    {
-        pdf.getPage(i).then(function(page) { 
-            var scale = 1.5;
-            var viewport = page.getViewport({ scale: scale, });
-            var canvas = document.getElementById('pdf-c'+i);
-            var context = canvas.getContext("2d");
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport,
-            };
-            page.render(renderContext);
-        });
-    }
-<!--IspdfFileEnd-->
+
 <!--IsFileEnd-->
 <!--IsFolderStart-->
 <!--HeadmdStart-->
